@@ -19,6 +19,14 @@
         <input type="text" id="username" class="form-control" placeholder="用户名" required autofocus>
         <label for="inputPassword" class="sr-only"></label>
         <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        
+        <span class="col-xs-6">
+        	<input name="randomCode" class="form-control .col-xs-2" placeholder="请输入验证码"/>
+        </span>
+        <div class="random">
+        	<img id="randImage" alt="验证码,点击刷新" 
+								src="$" title="点击刷新验证码">
+        </div>
         <div class="checkbox">
           <label>
             <input type="radio" value="student"> 学生
