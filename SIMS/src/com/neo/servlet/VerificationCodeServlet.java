@@ -38,11 +38,13 @@ public class VerificationCodeServlet extends HttpServlet {
 		// 验证码中所使用到的字符
         char[] codeChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456".toCharArray();
         String captcha = ""; // 存放生成的验证码
-        Random random = new Random();
+        long currentTime = System.currentTimeMillis();
+        
+        Random random = new Random(currentTime);
         for (int i = 0; i < CODE_LEN; i++) {
         	int index = random.nextInt(codeChar.length);
         	//随机生成验证码颜色
-        	graphics.setColor(new Color(random.nextInt(150), random.nextInt(200), random.nextInt(255)));
+        	graphics.setColor(new Color(random.nextInt(15), random.nextInt(200), random.nextInt(255)));
         	// 将一个字符绘制到图片上，并制定位置（设置x,y坐标）
             graphics.drawString(codeChar[index] + "", (i * 20) + 15, 20);
             captcha += codeChar[index];

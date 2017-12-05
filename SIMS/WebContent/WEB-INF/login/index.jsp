@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="random">
         	<img id="randImage" alt="验证码,点击刷新" 
 								src="<%=basePath%>/VCodeServlet" title="点击刷新验证码">
-								<a 	href="#" onclick="flush();">看不清？</a>
+								<a 	href="#" onclick="login.flushVcode();">看不清？</a>
         </div>
         <div class="checkbox">
           <label>
@@ -43,5 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </form>
 
     </div> <!-- /container -->
+${contextPath}
+    <script src="./resources/js/common.js"></script>
+    <script type="text/javascript" src="${contextPath}/resources/js/login/login.js"></script> 
+    
 	</body>
 </html>
