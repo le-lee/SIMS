@@ -1,6 +1,5 @@
 var login = function(){
 	var flushVcode = function(){
-//		$("#randImage").src
 		var time = new Date();
 		var imgPath = getBasePath() + "/VCodeServlet"
 		var img = document.getElementById("randImage");
@@ -9,7 +8,11 @@ var login = function(){
 	}
 	//提交表单
 	var submitForm = function(){
-		
+		console.log(getBasePath() + "/LoginServlet");
+		console.log("hello");
+//		var loginForm = $("#loginForm");
+		document.getElementById("loginForm").attr("action",getBasePath() + "/LoginServlet");
+		document.getElementById("loginForm").submit();
 	}
 	
 	var init = function(){
@@ -17,7 +20,8 @@ var login = function(){
 	}
 	return {
 		init : init,
-		flushVcode : flushVcode
+		flushVcode : flushVcode,
+		submitForm : submitForm
 	}
 }();
 login.init();

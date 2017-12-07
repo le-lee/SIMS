@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>老师主页</title>
 </head>
 <body>
 	欢迎用户：  ${username }！

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.neo.domain.Student;
 import com.neo.domain.Teacher;
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		if (userType.equals("teacher")) {
+		if (userType.equals("student")) {
 			studentLogin(request, response, context, username, password);
 		} else {
 			teacherLogin(request, response, context, username, password);
@@ -47,12 +48,15 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void studentLogin(HttpServletRequest request, HttpServletResponse response, ServletContext context, String username, String password) throws ServletException, IOException{
-		Student student = studentService.login(username, password);
+		System.out.println(username+ password);
+		Student student = studentService.getStudent(username, password);
 		System.out.println(student);
 		if (student != null){
 			//登录通过
-			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/welcome.jsp"); //定向的页面 
+			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/student/studentMain.jsp"); //定向的页面 
 			request.setAttribute("username", username);
+			HttpSession session = request.getSession();
+			session.setAttribute("student", student);
 			rd.forward(request, response); 
 		}else {
 			RequestDispatcher rd = context.getRequestDispatcher("/index.jsp"); //定向的页面 
@@ -67,7 +71,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(teacher);
 		if (teacher != null){
 			//登录通过
-			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacherMain.jsp"); //定向的页面 
+			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacherMain.jsp"); //定向的页面 
 			request.setAttribute("username", username);
 			rd.forward(request, response); 
 		}else {

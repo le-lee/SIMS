@@ -32,6 +32,7 @@ public class StudentDao {
 			student.setStudentId(rs.getString("studentId"));
 			student.setPassword(rs.getString("password"));
 			student.setStudentName(rs.getString("studentName"));
+			student.setPhoneNo(rs.getString("phoneNo"));
 		}
 		return student;
 	}

@@ -9,7 +9,7 @@ public class StudentService {
 	
 	StudentDao studentDao = new StudentDao();
 	
-	public Student login(String studentName, String password) {
+	public Student getStudent(String studentName, String password) {
 		Student student = null;
 		try {
 			student = studentDao.getStudent(studentName, password);
