@@ -13,5 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <h1>客户关系管理系统</h1>
     <a href="<%=basePath%>/StudentServlet?method=checkPersonalInfo">查看个人信息</a>
     <a href="<%=basePath%>/StudentServlet?method=toUpadtePersonalInfo">修改个人信息</a>
+    <a href="<%=basePath%>/LogoutServlet">退出登录</a>
 </body>
 </html>

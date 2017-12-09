@@ -27,8 +27,8 @@ public class StudentService {
 	public boolean updateStudent(Student student) throws Exception{
 		return studentDao.updateStudent(student);
 	}
-	public List<Student> getStudentList(){
-		return null;
+	public List<Student> getStudentList() throws Exception{
+		return studentDao.getStudentList();
 	}
 	
 }

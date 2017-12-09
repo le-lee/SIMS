@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="radio" name="userType" value="teacher"> 老师
           </label>
         </div>
-        <input class="btn btn-lg btn-primary btn-block" type="submit">登录</input>
+        <input class="btn btn-lg btn-primary btn-block" type="submit"></input>
       </form>
 
     </div> <!-- /container -->
