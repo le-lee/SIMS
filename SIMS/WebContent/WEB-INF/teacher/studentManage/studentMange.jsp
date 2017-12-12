@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <button id="importStudentListBtn" onclick="">导入学生</button>
 	
 	 <br>
-	 <table>
+	 <table border="1">
 	 	<thead>
             <tr>
 		 		<td>姓名</td>		
@@ -28,12 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		</tr>
         </thead>
 	 	<tbody>
-		 	<c:forEach items="${studentList }" var="student	">
+		 	<c:forEach items="${studentList }" var="student">
 		 		<tr>
-		 			<td>${student.studentName }</td>
-		 			<td>${student.classId }</td>
-		 			<td>${student.grade }</td>
-		 			<td>${student.phoneNo }</td>
+		 			<td>${student.studentName}</td>
+		 			<td>${student.classId}</td>
+		 			<td>${student.grade}</td>
+		 			<td>${student.phoneNo}</td>
 		 			<td><a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">修改信息</a></td>
 		 			<td><a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a></td>
 		 		</tr>

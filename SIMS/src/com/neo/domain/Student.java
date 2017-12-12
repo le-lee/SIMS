@@ -10,8 +10,15 @@ public class Student implements Serializable{
 	private String classId;
 	private String studentName;
 	private String password;
+	private float grade;
 	private String phoneNo;
 	
+	public float getGrade() {
+		return grade;
+	}
+	public void setGrade(float grade) {
+		this.grade = grade;
+	}
 	public String getStudentId() {
 		return studentId;
 	}

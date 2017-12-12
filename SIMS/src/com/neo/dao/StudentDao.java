@@ -48,11 +48,14 @@ public class StudentDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		List<Student> studentList = new ArrayList<>();
-		if ( rs.next() ) {
+		while ( rs.next() ) {
 			Student student = new Student();
 			student.setStudentId(rs.getString("studentId"));
 			student.setPassword(rs.getString("password"));
 			student.setStudentName(rs.getString("studentName"));
+			student.setClassId(rs.getString("classId"));
+			student.setPhoneNo(rs.getString("phoneNo"));
+			student.setGrade(rs.getFloat("grade"));
 			studentList.add(student);
 		}
 		return studentList;
