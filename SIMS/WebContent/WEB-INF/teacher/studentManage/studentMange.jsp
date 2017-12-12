@@ -40,5 +40,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	</c:forEach>
 		 </tbody>
 	 </table>
+	
+	<div class="layerWindow" id="updateStudentWindow">
+		<div class="layerContent">
+		<form style="margin:0;padding:0" id="studentForm">
+			<table class="tableBasic" width="100%" border="0" cellspacing="0">
+				<tr>
+					<td class="label">姓名<label style="color:red !important;">*</label></td>
+					<td class="data fullw">
+						<input value=""  name="studentName" class="m-input validate[required]"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="label">班级<label style="color:red !important;">*</label></td>
+					<td class="data fullw">
+						<input value=""  required name="classId" class="m-input validate[required]"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="label">年级<label style="color:red !important;">*</label></td>
+					<td class="data fullw">
+						<input value="" required name="grade" class="m-input validate[required]"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="label">电话号码<label style="color:red !important;">*</label></td>
+					<td class="data fullw">
+						<input value="" required name="phoneNo" class="m-input validate[required]"/>
+					</td>
+				</tr>
+			</table>			
+		</form>
+		</div>
+	</div> 
+	
+		 
+	 <script src="<%=basePath%>/resources/plugins/layui/layui.js"></script>
+	 <!-- TODO -->
+	 <script src=""></script>
+<script>
+//一般直接写在一个js文件中
+layui.use(['layer', 'form'], function(){
+  var layer = layui.layer
+  ,form = layui.form;
+  
+  layer.msg('Hello World');
+});
+
+
+</script> 
+	 
 </body>
 </html>
