@@ -38,10 +38,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 			<td><a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a></td>
 		 		</tr>
 		 	</c:forEach>
+		 	<tr>
+				<td colspan="11">共${page.totalRecord }条记录 共：${page.totalPageNo }页 当前为第：${page.pageNo + 1}页</td>
+			</tr>
+			<tr>
+					<td colspan="11">
+						
+						<c:choose>
+							<c:when test="${page.pageNo != 0}">
+								<a href="${contextPath }/TeacherServlet?method=checkStudentInfo&pageNo=${page.pageNo - 1}">上一页</a>
+							</c:when>
+						</c:choose>
+						
+						跳至：<input type="text/html" id="targetPage" name="targetPage"/>
+						<button onclick="">确定</button>
+						
+						<c:choose>
+							<c:when test="${page.pageNo +1 != page.totalPageNo }">
+								<a href="${contextPath }/TeacherServlet?method=checkStudentInfo&pageNo=${page.pageNo + 1 }">下一页</a>
+							</c:when>
+						</c:choose>
+					
+					
+					</td>
+				</tr>
 		 </tbody>
 	 </table>
 	
-	<div class="layerWindow" id="updateStudentWindow">
+<!-- 	<div class="layerWindow" id="updateStudentWindow">
 		<div class="layerContent">
 		<form style="margin:0;padding:0" id="studentForm">
 			<table class="tableBasic" width="100%" border="0" cellspacing="0">
@@ -73,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</table>			
 		</form>
 		</div>
-	</div> 
+	</div>  -->
 	
 		 
 	 <script src="<%=basePath%>/resources/plugins/layui/layui.js"></script>
@@ -85,7 +109,7 @@ layui.use(['layer', 'form'], function(){
   var layer = layui.layer
   ,form = layui.form;
   
-  layer.msg('Hello World');
+ // layer.msg('Hello World');
 });
 
 

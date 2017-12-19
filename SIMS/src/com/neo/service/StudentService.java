@@ -27,8 +27,17 @@ public class StudentService {
 	public boolean updateStudent(Student student) throws Exception{
 		return studentDao.updateStudent(student);
 	}
-	public List<Student> getStudentList() throws Exception{
-		return studentDao.getStudentList();
+	public List<Student> getStudentList(int pageNo, int pageSize) throws Exception{
+		int startIndex = pageNo;
+		if (pageNo != 0){
+			startIndex = pageNo * pageSize - 1;
+		} 
+		
+		return studentDao.getStudentList(startIndex, pageSize);
 	}
 	
+	public int getStudentCount() throws Exception{
+		int studentCount = studentDao.getStudentCount();
+		return studentCount;
+	}	
 }

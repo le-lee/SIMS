@@ -42,10 +42,15 @@ public class StudentDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Student> getStudentList() throws Exception{
-		String sql = "select * from student";
+	public List<Student> getStudentList(int startIndex, int pageSize) throws Exception {
+		//后面的这个变量已经设定了
+		//页面需要展示的数据，当前是第几页，当前这个页的第一个数据的索引是多少。
+		//一共有多少条记录，下一页，或者后面几页的url
+		String sql = "select * from student order by studentId limit ?, ?";
 		Connection conn = JdbcUtils.getConncetion();
 		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, startIndex);
+		ps.setInt(2, pageSize);
 		ResultSet rs = ps.executeQuery();
 		List<Student> studentList = new ArrayList<>();
 		while ( rs.next() ) {
@@ -59,6 +64,24 @@ public class StudentDao {
 			studentList.add(student);
 		}
 		return studentList;
+	}
+	
+	//条件查询的分页，也需要先统计总数
+	/**
+	 * 计数
+	 * @return
+	 * @throws Exception
+	 */
+	public int getStudentCount()throws Exception {
+		int studentCount = 0;
+		String sql = "select count(*) as studentCount from student ";
+		Connection conn = JdbcUtils.getConncetion();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			studentCount = rs.getInt("studentCount");	
+		}
+		return studentCount; 
 	}
 	
 	/**
