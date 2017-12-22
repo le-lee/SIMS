@@ -46,7 +46,7 @@ public class StudentDao {
 		//后面的这个变量已经设定了
 		//页面需要展示的数据，当前是第几页，当前这个页的第一个数据的索引是多少。
 		//一共有多少条记录，下一页，或者后面几页的url
-		String sql = "select * from student order by studentId limit ?, ?";
+		String sql = "select * from student where 1=1 and deleteFlag = 0 order by studentId  limit ?, ? ";
 		Connection conn = JdbcUtils.getConncetion();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, startIndex);
@@ -108,10 +108,12 @@ public class StudentDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean deleteStudent(Student student) throws Exception{
-		String sql = "delete from student where studentId=? ";
+	public boolean deleteStudent(String studentId) throws Exception{
+//		String sql = "delete from student where studentId=? ";
+		String sql = "update student set deleteFlag = 1 where studentId=? ";
 		Connection conn = JdbcUtils.getConncetion();
 		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, studentId);
 		boolean result = ps.execute();  
 		return result;
 	}

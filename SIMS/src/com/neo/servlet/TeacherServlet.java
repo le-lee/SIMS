@@ -33,11 +33,28 @@ public class TeacherServlet extends HttpServlet{
 			}
 		} else if (method.equals("deleteStudent")) {
 			System.out.println("删除学生信息");
+			deleteStudent(request, response);
+		} else if (method.equals("updateStudent")){
+			System.out.println("更新学生信息");
 			updatePersonalInfo(request, response);
-		} else if (method.equals("checkPersonalInfo")){
+		}else if (method.equals("checkPersonalInfo")){
 			System.out.println("跳转到个人信息界面");
 			tocheckPersonalInfo(request, response);
 		}
+	}
+
+	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentId = request.getParameter("studentId");
+		String message = "删除成功";
+		try{
+			studentService.deleteStudent(studentId);
+		} catch(Exception e){
+			message = "删除失败";
+		} 
+		request.setAttribute("message", message);
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
+		rd.forward(request, response); 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

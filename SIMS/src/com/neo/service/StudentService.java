@@ -21,8 +21,8 @@ public class StudentService {
 	public boolean addStudent(Student student) throws Exception{
 		return studentDao.addStudent(student);
 	}
-	public boolean deleteStudent(Student student) throws Exception{
-		return studentDao.deleteStudent(student);
+	public boolean deleteStudent(String studentId) throws Exception{
+		return studentDao.deleteStudent(studentId);
 	}
 	public boolean updateStudent(Student student) throws Exception{
 		return studentDao.updateStudent(student);

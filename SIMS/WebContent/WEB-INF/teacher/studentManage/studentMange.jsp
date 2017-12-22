@@ -11,11 +11,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	欢迎用户：  ${username }！
 	 <h1>学生管理</h1>
-	 学生姓名：<input type="text" id="studentName" name="studentName"/>
-	 班级：<input type="text" id="class" name="class"/>
-	 年级：<input type="text" id="grade" name="grade"/>
-	 <button id="addStudentBtn" onclick="">增加学生</button>
+	 <form >
+	 	 学生姓名：<input type="text" id="studentName" name="studentName"/>
+		 班级：<input type="text" id="class" name="class"/>
+	 	年级：<input type="text" id="grade" name="grade"/>
+	 	<button id="searchBtn" onclick="search">查找</button>
+	 	 <button id="addStudentBtn" onclick="">增加学生</button>
 	 <button id="importStudentListBtn" onclick="">导入学生</button>
+	 </form>
 	
 	 <br>
 	 <table border="1">
@@ -104,13 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <!-- TODO -->
 	 <script src=""></script>
 <script>
-//一般直接写在一个js文件中
-layui.use(['layer', 'form'], function(){
-  var layer = layui.layer
-  ,form = layui.form;
-  
- // layer.msg('Hello World');
-});
+	var search = function(){
+		
+	}	
 
 
 </script> 
