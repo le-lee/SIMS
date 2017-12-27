@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>老师主页</title>
 </head>
 <body>
-	欢迎用户：  ${username }！
+		欢迎老师：  ${sessionScope.teacher.teacherName}！
 	 <h1>学生管理</h1>
 	 <form >
 	 	 学生姓名：<input type="text" id="studentName" name="studentName"/>
