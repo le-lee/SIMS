@@ -9,17 +9,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta charset="utf-8" />
 		<title>登录</title>
 		<!-- 免费 CDN  -->
-	
 		<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-		<!-- <link rel='stylesheet' href='resources/plugins/bootstrap-3.3.7/css/bootstrap.min.css'> -->
-		
 		<link rel="stylesheet" type="text/css" href="resources/css/login.css"/>
-		
+		<script type="text/javascript" src="resourse/plugins/jquery/jquery-3.2.1.min.js"></script>
+		<!-- 别人项目里面，引入的js资源，这里base是在哪里定义的呢？ -->
+		<!-- <script type="text/javascript" src="${base}/kaola/V20171229/js/lib/jquery-1.9.1.min.js"></script> -->
 	</head>
-	<body>
-	<div id="header">
-	</div>
 	
+	<body>
+	<div id="header"></div>
 	<div class="container">
       <form id="loginForm" class="form-signin" action="<%=basePath%>/LoginServlet">
         <h2 class="form-signin-heading">登录</h2>
