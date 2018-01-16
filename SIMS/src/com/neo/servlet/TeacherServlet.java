@@ -24,6 +24,29 @@ public class TeacherServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
+		if (method.equals("student_manage")) {
+			try {
+				toStudentManage(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (method.equals("grade_manage")) {
+			try {
+				toGradeManage(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (method.equals("toResetPwd")) {
+			try {
+				toResetPwd(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		if (method.equals("checkStudentInfo")) {
 			System.out.println("查看学生信息");
 			try {
@@ -37,12 +60,47 @@ public class TeacherServlet extends HttpServlet{
 		} else if (method.equals("updateStudent")){
 			System.out.println("更新学生信息");
 			updatePersonalInfo(request, response);
-		}else if (method.equals("checkPersonalInfo")){
+		}else if (method.equals("toPersonalInfo")){
 			System.out.println("跳转到个人信息界面");
-			tocheckPersonalInfo(request, response);
+			toPersonalInfo(request, response);
 		}
 	}
-
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	//重置密码
+	private void toResetPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_reset_pwd.jsp"); //定向的页面 
+		rd.forward(request, response); 
+		
+	}
+	//跳转到成绩管理
+	private void toGradeManage(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ServletContext context = getServletContext(); 
+		String contextPath = context.getContextPath();
+		HttpSession session = request.getSession();
+		session.setAttribute("contextPath", contextPath);
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_gradeManage.jsp");
+		rd.forward(request, response); 
+	}
+	//跳转到学生管理
+	private void toStudentManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ServletContext context = getServletContext(); 
+		String contextPath = context.getContextPath();
+		HttpSession session = request.getSession();
+		session.setAttribute("contextPath", contextPath);
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_studentManage.jsp");
+		rd.forward(request, response); 
+	}
+	//跳转到个人信息
+	private void toPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_personal_info.jsp"); //定向的页面 
+		rd.forward(request, response); 
+	}	
 	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String studentId = request.getParameter("studentId");
 		String message = "删除成功";
@@ -55,10 +113,6 @@ public class TeacherServlet extends HttpServlet{
 		ServletContext context = getServletContext(); 
 		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
 		rd.forward(request, response); 
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 	
 	private void checkStudentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -98,12 +152,6 @@ public class TeacherServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		session.setAttribute("contextPath", contextPath);
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/studentManage/studentMange.jsp");
-		rd.forward(request, response); 
-	}	
-	
-	private void tocheckPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		ServletContext context = getServletContext(); 
-		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/student/upadtePersonalInfo.jsp"); //定向的页面 
 		rd.forward(request, response); 
 	}	
 	
