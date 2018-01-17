@@ -24,6 +24,11 @@ public class TeacherServlet extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
+		//主页
+		if (method.equals("toMain")) {
+			toMain(request,response);
+		} 
+		
 		if (method.equals("student_manage")) {
 			try {
 				toStudentManage(request,response);
@@ -69,7 +74,11 @@ public class TeacherServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+	private void toMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_main.jsp"); //定向的页面 
+		rd.forward(request, response); 
+	}	
 	//重置密码
 	private void toResetPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ServletContext context = getServletContext(); 

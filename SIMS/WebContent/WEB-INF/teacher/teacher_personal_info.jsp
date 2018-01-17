@@ -54,7 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </nav>
 
-
     <div class="col-xs-6 col-md-offset-3" style="position: relative;top: 25%">
       <div class="panel panel-primary">
 				<div class="panel-heading">

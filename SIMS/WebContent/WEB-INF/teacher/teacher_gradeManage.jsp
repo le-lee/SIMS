@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <!-- Bootstrap core CSS -->
     <link href="<%=basePath %>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="<%=basePath%>/resources/css/navbar-static-top.css" rel="stylesheet">
 

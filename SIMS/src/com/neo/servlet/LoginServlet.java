@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(student);
 		if (student != null){
 			//登录通过
-			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/student/studentMain.jsp"); //定向的页面 
+			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/student/student_main.jsp"); //定向的页面 
 			request.setAttribute("username", username);
 			HttpSession session = request.getSession();
 			session.setAttribute("student", student);
