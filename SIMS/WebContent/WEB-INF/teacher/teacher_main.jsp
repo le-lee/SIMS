@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">学生成绩管理系统</a>
+          <a class="navbar-brand" href="<%=basePath%>/TeacherServlet?method=toMain">学生成绩管理系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -52,9 +52,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </nav>
 
 
-    <div class="container">
+   <div class="container">
 
-      
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h2>欢迎登录</h2>
+        <p>该系统基于Servlet技术</p>
+      </div>
     </div> <!-- /container -->
 
 

@@ -94,37 +94,10 @@ public class TeacherServlet extends HttpServlet{
 		session.setAttribute("contextPath", contextPath);
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_gradeManage.jsp");
 		rd.forward(request, response); 
+		
 	}
 	//跳转到学生管理
 	private void toStudentManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ServletContext context = getServletContext(); 
-		String contextPath = context.getContextPath();
-		HttpSession session = request.getSession();
-		session.setAttribute("contextPath", contextPath);
-		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_studentManage.jsp");
-		rd.forward(request, response); 
-	}
-	//跳转到个人信息
-	private void toPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		ServletContext context = getServletContext(); 
-		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_personal_info.jsp"); //定向的页面 
-		rd.forward(request, response); 
-	}	
-	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String studentId = request.getParameter("studentId");
-		String message = "删除成功";
-		try{
-			studentService.deleteStudent(studentId);
-		} catch(Exception e){
-			message = "删除失败";
-		} 
-		request.setAttribute("message", message);
-		ServletContext context = getServletContext(); 
-		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
-		rd.forward(request, response); 
-	}
-	
-	private void checkStudentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String pageNo = request.getParameter("pageNo");
 		String pageSize = request.getParameter("pageSize");
 		Page page = new Page();
@@ -160,8 +133,31 @@ public class TeacherServlet extends HttpServlet{
 		String contextPath = context.getContextPath();
 		HttpSession session = request.getSession();
 		session.setAttribute("contextPath", contextPath);
-		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/studentManage/studentMange.jsp");
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_studentManage.jsp");
 		rd.forward(request, response); 
+	}
+	//跳转到个人信息
+	private void toPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_personal_info.jsp"); //定向的页面 
+		rd.forward(request, response); 
+	}	
+	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String studentId = request.getParameter("studentId");
+		String message = "删除成功";
+		try{
+			studentService.deleteStudent(studentId);
+		} catch(Exception e){
+			message = "删除失败";
+		} 
+		request.setAttribute("message", message);
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
+		rd.forward(request, response); 
+	}
+	
+	private void checkStudentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 	}	
 	
 	private void updatePersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

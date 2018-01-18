@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">学生成绩管理系统</a>
+          <a class="navbar-brand" href="<%=basePath%>/TeacherServlet?method=toMain">学生成绩管理系统</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -53,33 +53,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </nav>
 
-
 	<div>
     	<form  method="post" action="reader_querybook_do.html" class="form-inline"  id="searchform">
-        <div class="col-lg-6">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="输入学生姓名或学号">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								搜索
-							</button>
-						</span>
-						
-						<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							选择年级 
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="#">大一</a></li>
-							<li><a href="#">大二</a></li>
-							<li><a href="#">大三</a></li>
-							<li><a href="#">大四</a></li>
-						</ul>
-					</div><!-- /btn-group -->
-					<input type="text" class="form-control">
-					</div><!-- /input-group -->
-				</div><!-- /.col-lg-6 -->
+	       <div class="col-lg-6">
+	      		<div class="input-group">
+	      			<button class="btn btn-default" type="button">
+							添加
+					</button>
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="输入学生姓名或学号">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">
+						搜索
+					</button>
+				</span>
+				
+				<div class="input-group-btn">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					选择年级 
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">大一</a></li>
+					<li><a href="#">大二</a></li>
+					<li><a href="#">大三</a></li>
+					<li><a href="#">大四</a></li>
+				</ul>
+			</div><!-- /btn-group -->
+			<input type="text" class="form-control">
+			</div><!-- /input-group -->
+		</div><!-- /.col-lg-6 -->
     	</form>
 	</div>
 	
@@ -97,6 +101,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		</tr>
         </thead>
 	 	<tbody>
+		 		<c:forEach items="${studentList }" var="student">
+			 		<tr>
+			 			<td>${student.studentName}</td>
+			 			<td>2013310200315</td>
+			 			<td>${student.classId}</td>
+			 			<td>${student.grade}</td>
+			 			<td>${student.phoneNo}</td>
+			 			<td>
+			 				<a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">编辑</a>
+			 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
+			 			</td>
+			 		</tr>
+			 	</c:forEach>
 		 		<tr>
 		 			<td>李晓旭</td>
 		 			<td>2013310200315</td>
