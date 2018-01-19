@@ -17,60 +17,44 @@ import com.neo.service.StudentService;
 import com.neo.utils.Page;
 
 public class TeacherServlet extends HttpServlet{
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	StudentService studentService = new StudentService();
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
-		//主页
-		if (method.equals("toMain")) {
-			toMain(request,response);
-		} 
-		
-		if (method.equals("student_manage")) {
-			try {
+		try {
+			switch (method){
+			case "toMain":
+				toMain(request,response);
+				break;
+			case "student_manage":
 				toStudentManage(request,response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		if (method.equals("grade_manage")) {
-			try {
+				break;
+			case "grade_manage":
 				toGradeManage(request,response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (method.equals("toResetPwd")) {
-			try {
+				break;
+			case "toResetPwd":
 				toResetPwd(request,response);
-			} catch (Exception e) {
-				e.printStackTrace();
+				break;
+			case "deleteStudent":
+				deleteStudent(request, response);
+				break;
+			case "updateStudent":
+				toUpdatePersonalInfo(request, response);
+				break;
+			case "toPersonalInfo":
+				toPersonalInfo(request, response);
+				break;
+			default: 
+				toMain(request,response);
 			}
-		}
-		
-		if (method.equals("checkStudentInfo")) {
-			System.out.println("查看学生信息");
-			try {
-				checkStudentInfo(request,response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (method.equals("deleteStudent")) {
-			System.out.println("删除学生信息");
-			deleteStudent(request, response);
-		} else if (method.equals("updateStudent")){
-			System.out.println("更新学生信息");
-			updatePersonalInfo(request, response);
-		}else if (method.equals("toPersonalInfo")){
-			System.out.println("跳转到个人信息界面");
-			toPersonalInfo(request, response);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
@@ -84,7 +68,7 @@ public class TeacherServlet extends HttpServlet{
 		ServletContext context = getServletContext(); 
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_reset_pwd.jsp"); //定向的页面 
 		rd.forward(request, response); 
-		
+
 	}
 	//跳转到成绩管理
 	private void toGradeManage(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -94,7 +78,7 @@ public class TeacherServlet extends HttpServlet{
 		session.setAttribute("contextPath", contextPath);
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_gradeManage.jsp");
 		rd.forward(request, response); 
-		
+
 	}
 	//跳转到学生管理
 	private void toStudentManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -107,13 +91,13 @@ public class TeacherServlet extends HttpServlet{
 		} else {
 			page.setPageNo(0);
 		}
-		
+
 		if (pageSize != null && pageSize.matches("^[0-9]+$")) {
 			page.setPageSize(new Integer(pageSize));			//设置页面大小
 		} else {
 			page.setPageSize(Page.DEFAUL_PAGE_SIZE);
 		}
-		
+
 		List<Student> studentList = new ArrayList<>();
 		try {
 			int studentCount = studentService.getStudentCount();
@@ -125,10 +109,10 @@ public class TeacherServlet extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		request.setAttribute("studentList", studentList);
 		request.setAttribute("page", page);
-		
+
 		ServletContext context = getServletContext(); 
 		String contextPath = context.getContextPath();
 		HttpSession session = request.getSession();
@@ -155,12 +139,12 @@ public class TeacherServlet extends HttpServlet{
 		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
 		rd.forward(request, response); 
 	}
-	
+
 	private void checkStudentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 	}	
-	
-	private void updatePersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	private void toUpdatePersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		HttpSession session = request.getSession();
 		ServletContext context = getServletContext(); 
 		Student student = (Student) session.getAttribute("student");

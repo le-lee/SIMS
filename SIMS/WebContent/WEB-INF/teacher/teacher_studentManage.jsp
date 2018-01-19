@@ -42,8 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <ul class="nav navbar-nav">
             <li class="active"><a href="<%=basePath%>/TeacherServlet?method=student_manage">学生管理</a></li>
             <li><a href="<%=basePath%>/TeacherServlet?method=grade_manage">成绩管理</a></li>
-            <li><a href="teacher_info.html">个人信息</a></li>
-            <li><a href="teacher_reset_pwd.html">修改密码</a></li>
+            <li><a href="<%=basePath%>/TeacherServlet?method=toPersonalInfo">个人信息</a></li>
+            <li><a href="<%=basePath%>/TeacherServlet?method=toResetPwd">修改密码</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎X老师</a></li>
@@ -57,22 +57,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<form  method="post" action="reader_querybook_do.html" class="form-inline"  id="searchform">
 	       <div class="col-lg-6">
 	      		<div class="input-group">
-	      			<button class="btn btn-default" type="button">
-							添加
-					</button>
-			</div>
-			<div class="input-group">
+	      			<button class="btn btn-default" type="button">添加</button>
+				</div>
+				<div class="input-group">
 				<input type="text" class="form-control" placeholder="输入学生姓名或学号">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-						搜索
-					</button>
+					<button class="btn btn-default" type="button">搜索</button>
 				</span>
 				
 				<div class="input-group-btn">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					选择年级 
-					<span class="caret"></span>
+					选择年级 <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
 					<li><a href="#">大一</a></li>
