@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,8 +15,9 @@ import com.neo.domain.Student;
 import com.neo.service.StudentService;
 import com.neo.utils.Page;
 
-public class TeacherServlet extends HttpServlet{
-
+public class TeacherServlet extends BaseServlet{
+	//TODO 将页面跳转请求响应，和学生管理的增删改查业务操作请求响应分开，页面跳转以后，再请求具体的数据
+	
 	private static final long serialVersionUID = 1L;
 
 	StudentService studentService = new StudentService();
@@ -26,27 +26,33 @@ public class TeacherServlet extends HttpServlet{
 		String method = request.getParameter("method");
 		try {
 			switch (method){
-			case "toMain":
+			/********页面跳转***********/
+			case "toMain":			//主页
 				toMain(request,response);
-				break;
-			case "student_manage":
+				break;		
+			case "student_manage":	//学生管理
 				toStudentManage(request,response);
-				break;
-			case "grade_manage":
+				break;		
+			case "grade_manage":	//成绩管理
 				toGradeManage(request,response);
 				break;
-			case "toResetPwd":
+			case "toResetPwd":		//重置密码
 				toResetPwd(request,response);
 				break;
+			case "toPersonalInfo":	//个人信息
+				toPersonalInfo(request, response);
+				break;
+				/********学生管理具体功能***********/
 			case "deleteStudent":
 				deleteStudent(request, response);
 				break;
 			case "updateStudent":
-				toUpdatePersonalInfo(request, response);
+				updateStudent(request, response);
 				break;
-			case "toPersonalInfo":
-				toPersonalInfo(request, response);
-				break;
+			case "addStudent":
+				addStudent(request, response);
+			case "getStudent":
+				getStudent(request, response);
 			default: 
 				toMain(request,response);
 			}
@@ -54,23 +60,26 @@ public class TeacherServlet extends HttpServlet{
 			e1.printStackTrace();
 		}
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+	/**
+	 * 主页
+	 */
 	private void toMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		ServletContext context = getServletContext(); 
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_main.jsp"); //定向的页面 
 		rd.forward(request, response); 
 	}	
-	//重置密码
+	/**
+	 * 重置密码
+	 */
 	private void toResetPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ServletContext context = getServletContext(); 
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_reset_pwd.jsp"); //定向的页面 
 		rd.forward(request, response); 
 
 	}
-	//跳转到成绩管理
+	/***
+	 * 成绩管理
+	 */
 	private void toGradeManage(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ServletContext context = getServletContext(); 
 		String contextPath = context.getContextPath();
@@ -80,7 +89,9 @@ public class TeacherServlet extends HttpServlet{
 		rd.forward(request, response); 
 
 	}
-	//跳转到学生管理
+	/***
+	 * 学生管理
+	 */
 	private void toStudentManage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String pageNo = request.getParameter("pageNo");
 		String pageSize = request.getParameter("pageSize");
@@ -101,7 +112,7 @@ public class TeacherServlet extends HttpServlet{
 		List<Student> studentList = new ArrayList<>();
 		try {
 			int studentCount = studentService.getStudentCount();
-			studentList = studentService.getStudentList(page.getPageNo(), page.getPageSize());
+			studentList = getStudentList(page);
 			page.setTotalRecord(studentCount);						//设置总记录数
 			int operationResult = (studentCount % page.getPageSize());
 			int totalPageNo = operationResult == 0 ? operationResult : studentCount / page.getPageSize() + 1;
@@ -120,12 +131,24 @@ public class TeacherServlet extends HttpServlet{
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_studentManage.jsp");
 		rd.forward(request, response); 
 	}
-	//跳转到个人信息
+	/***
+	 * 跳转到个人信息
+	 */
 	private void toPersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		ServletContext context = getServletContext(); 
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_personal_info.jsp"); //定向的页面 
 		rd.forward(request, response); 
 	}	
+	/**
+	 * 增加学生
+	 */
+	private void addStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+	}	
+	
+	/**
+	 * 删除学生
+	 */
 	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String studentId = request.getParameter("studentId");
 		String message = "删除成功";
@@ -139,25 +162,32 @@ public class TeacherServlet extends HttpServlet{
 		RequestDispatcher rd = context.getRequestDispatcher("/TeacherServlet?method=checkStudentInfo");
 		rd.forward(request, response); 
 	}
-
-	private void checkStudentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+	
+	/**
+	 * 修改学生信息
+	 */
+	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Student student = new Student();
+		String studentId = request.getParameter("studentId");
+		String studentName = request.getParameter("studentName");
+		student.setStudentId(studentId);
+		student.setStudentName(studentName);
+		studentService.updateStudent(student);
+	}	
+	
+	/**
+	 * 获取某个学生信息
+	 */
+	private Student getStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String studentId = request.getParameter("studentId");
+		return studentService.getStudent(studentId);
+	}	
+	
+	/**
+	 * 获取学生信息列表
+	 */
+	private List<Student> getStudentList(Page page) throws Exception {
+		return studentService.getStudentList(page.getPageNo(), page.getPageSize());
 	}	
 
-	private void toUpdatePersonalInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		HttpSession session = request.getSession();
-		ServletContext context = getServletContext(); 
-		Student student = (Student) session.getAttribute("student");
-		student.setPhoneNo(request.getParameter("phoneNo"));
-		student.setStudentId(request.getParameter("username"));
-		try {
-			studentService.updateStudent(student);
-		} catch (Exception e) {
-			e.printStackTrace();
-			RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/fail.jsp"); //定向的页面 
-			rd.forward(request, response); 
-		}
-		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/success.jsp"); //定向的页面 
-		rd.forward(request, response); 
-	}	
 }	

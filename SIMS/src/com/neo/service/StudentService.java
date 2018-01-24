@@ -18,6 +18,16 @@ public class StudentService {
 		}
 		return student;
 	}
+	
+	public Student getStudent(String studentId) {
+		Student student = null;
+		try {
+			student = studentDao.getStudent(studentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return student;
+	}
 	public boolean addStudent(Student student) throws Exception{
 		return studentDao.addStudent(student);
 	}
