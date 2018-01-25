@@ -1,48 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <servlet>
-    <servlet-name>DispatcherServlet</servlet-name>
-    <servlet-class>com.neo.servlet.DispatcherServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DispatcherServlet</servlet-name>
-    <url-pattern>/DispatcherServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>StudentServlet</servlet-name>
-    <servlet-class>com.neo.servlet.StudentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>StudentServlet</servlet-name>
-    <url-pattern>/StudentServlet</url-pattern>
-  </servlet-mapping>
- 
- <servlet>
-    <servlet-name>TeacherServlet</servlet-name>
-    <servlet-class>com.neo.servlet.TeacherServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TeacherServlet</servlet-name>
-    <url-pattern>/TeacherServlet</url-pattern>
-  </servlet-mapping>
- 
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.neo.servlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>VerificationCodeServlet</servlet-name>
-    <servlet-class>com.neo.servlet.VerificationCodeServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>VerificationCodeServlet</servlet-name>
-    <url-pattern>/VCodeServlet</url-pattern>
-  </servlet-mapping>
-  <welcome-file-list>
-    <welcome-file>DispatcherServlet</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<!-- web.xml中配置的加载优先级 -->
+	<!-- 
+		web.xml 的加载顺序是：context-param -> listener -> filter -> servlet ，
+		而同个类型之间的实际程序调用的时候的顺序是根据对应的 mapping 的顺序进行调用的。
+	 -->
+	
+	<!-- 通过Lintener初始化 -->
+	<context-param>
+		<param-name>log4j</param-name>
+		<param-value>WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>com.neo.listener.MyServletContextListener</listener-class>
+	</listener>
+
+	<!-- 配置log4j -->
+	<servlet>
+		<servlet-name>Log4jInitServlet</servlet-name>
+		<servlet-class>com.neo.servlet.Log4jInitServlet</servlet-class>
+		<init-param>
+			<param-name>log4j-init-file</param-name>
+			<param-value>WEB-INF/classes/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Log4jInitServlet</servlet-name>
+		<url-pattern>/Log4jInitServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>com.neo.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>/DispatcherServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>StudentServlet</servlet-name>
+		<servlet-class>com.neo.servlet.StudentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StudentServlet</servlet-name>
+		<url-pattern>/StudentServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TeacherServlet</servlet-name>
+		<servlet-class>com.neo.servlet.TeacherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TeacherServlet</servlet-name>
+		<url-pattern>/TeacherServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.neo.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>VerificationCodeServlet</servlet-name>
+		<servlet-class>com.neo.servlet.VerificationCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerificationCodeServlet</servlet-name>
+		<url-pattern>/VCodeServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>DispatcherServlet</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		/404.jsp
+	</error-page>
 </web-app>
