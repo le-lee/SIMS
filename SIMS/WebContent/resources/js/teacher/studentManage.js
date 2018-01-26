@@ -1,6 +1,6 @@
 var studentManage = function (){
 	//TODO
-	var updateStudent = function(){
+	var saveStudent = function(){
 		layer.open({
 			type:1,
 			title:'修改学生信息',
@@ -13,6 +13,6 @@ var studentManage = function (){
 	}
 	
 	return {
-		updateStudent : updateStudent
+		saveStudent : saveStudent
 	}
 }();

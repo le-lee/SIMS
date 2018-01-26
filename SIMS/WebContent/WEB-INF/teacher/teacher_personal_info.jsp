@@ -16,11 +16,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <title>个人信息</title>
 
-     <!-- Bootstrap core CSS -->
-    <link href="<%=basePath %>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Custom styles for this template -->
+     <link href="<%=basePath %>/resources/plugins/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<%-- <jsp:include page="<%=basePath %>/WEB-INF/teacher/common.jsp"></jsp:include> --%>
+    <script type="text/javascript" src="resources/plugins/jquery/jquery-3.2.1.min.js"></script>
     <link href="<%=basePath%>/resources/css/navbar-static-top.css" rel="stylesheet">
 
   </head>

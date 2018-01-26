@@ -16,11 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <title>学生管理</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<%=basePath %>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Custom styles for this template -->
+    <link href="<%=basePath %>/resources/plugins/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<%-- <jsp:include page="<%=basePath %>/WEB-INF/teacher/common.jsp"></jsp:include> --%>
+    <script type="text/javascript" src="resources/plugins/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="resources/plugins/layui/layui.all.js"></script>
     <link href="<%=basePath%>/resources/css/navbar-static-top.css" rel="stylesheet">
     
   </head>
@@ -104,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 			<td>${student.grade}</td>
 			 			<td>${student.phoneNo}</td>
 			 			<td>
-			 				<a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">编辑</a>
+			 				<a href="javascript: studentManage.saveStudent()">编辑</a>
 			 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
 			 			</td>
 			 		</tr>
@@ -157,7 +156,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<li><a href="#">&raquo;</a></li>
 		</ul>    	
     </div>
-
+    <!-- 这里layer窗口内容，应该放在哪里 -->
+	<!-- 编辑窗口 -->
+	
+	<script>
+	var studentManage = function (){
+		//TODO
+		var saveStudent = function(){
+			 layer.open({
+				type:2,
+				title:'修改学生信息',
+				area:['400px', '450px'],
+				btn:['确定','关闭'],
+				closeBtn:1,	//不显示关闭按钮
+				shadeClose:false,	//开启遮罩关闭
+				content:'<%=basePath%>/TeacherServlet?method=toEditStudent',
+				yes:function(index){
+					
+				}
+			}); 
+			//layer.msg("hello");
+		}
+		
+		return {
+			saveStudent : saveStudent
+		}
+	}();
+	</script>
   </body>
 </html>
 

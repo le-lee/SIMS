@@ -1,6 +1,7 @@
 package com.neo.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,10 @@ public class TeacherServlet extends BaseServlet{
 				toPersonalInfo(request, response);
 				break;
 				/********学生管理具体功能***********/
+				//申请返回编辑页面
+			case "toEditStudent":
+				toEditStudent(request, response);
+				break;
 			case "deleteStudent":
 				deleteStudent(request, response);
 				break;
@@ -60,6 +65,7 @@ public class TeacherServlet extends BaseServlet{
 			e1.printStackTrace();
 		}
 	}
+	
 	/**
 	 * 主页
 	 */
@@ -139,6 +145,22 @@ public class TeacherServlet extends BaseServlet{
 		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/teacher_personal_info.jsp"); //定向的页面 
 		rd.forward(request, response); 
 	}	
+	
+	private void toEditStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		System.out.println("to");
+		//TODO 待修改为@RequesMapping， springMVC返回页面的机制。
+		//捕捉到了页面请求，怎么返回页面
+//		PrintWriter writer =  response.getWriter();
+//		writer.write("hello");
+//		writer.flush();
+//		writer.close();
+		
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/teacher/student_edit.jsp"); //定向的页面 
+		rd.forward(request, response); 
+		
+		
+	}
 	/**
 	 * 增加学生
 	 */

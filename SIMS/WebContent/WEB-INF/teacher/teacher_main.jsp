@@ -12,13 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>成绩管理系统主页</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<%=basePath %>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="<%=basePath %>/resources/plugins/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<%-- <jsp:include page="<%=basePath %>/WEB-INF/teacher/common.jsp"></jsp:include> --%>
+    <script type="text/javascript" src="resources/plugins/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="resources/plugins/layui/layui.all.js"></script>
+    <link href="<%=basePath%>/resources/css/navbar-static-top.css" rel="stylesheet">
 
   </head>
 
