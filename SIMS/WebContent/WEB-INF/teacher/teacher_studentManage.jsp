@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<form  method="post" action="reader_querybook_do.html" class="form-inline"  id="searchform">
 	       <div class="col-lg-6">
 	      		<div class="input-group">
-	      			<button class="btn btn-default" type="button">添加</button>
+	      			<button class="btn btn-default" type="button" onclick="studentManage.addStudent();">添加</button>
 				</div>
 				<div class="input-group">
 				<input type="text" class="form-control" placeholder="输入学生姓名或学号">
@@ -86,61 +86,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<caption>学生信息</caption>
 	 	<thead>
             <tr>
+            	<th>班级id</th>
+            	<th>年级id</th>
 		 		<th>姓名</th>
 		 		<th>学号</th>	
-		 		<th>班级</th>
-		 		<th>年级</th>
 		 		<th>电话号码</th>
+		 		<th>籍贯</th>
 		 		<th>操作</th>
 	 		</tr>
         </thead>
 	 	<tbody>
-		 		<c:forEach items="${studentList }" var="student">
+		 		<c:forEach items="${studentList}" var="student">
 			 		<tr>
-			 			<td>${student.studentName}</td>
-			 			<td>2013310200315</td>
 			 			<td>${student.classId}</td>
-			 			<td>${student.grade}</td>
+			 			<td>${student.gradeId}</td>
+			 			<td>${student.studentName}</td>
+			 			<td>${student.studentNo}</td>
 			 			<td>${student.phoneNo}</td>
+			 			<td>${student.hometown}</td>
 			 			<td>
 			 				<a href="javascript: studentManage.saveStudent()">编辑</a>
 			 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
 			 			</td>
 			 		</tr>
 			 	</c:forEach>
-		 		<tr>
-		 			<td>李晓旭</td>
-		 			<td>2013310200315</td>
-		 			<td>计科1303</td>
-		 			<td>大一</td>
-		 			<td>15207156686</td>
-		 			<td>
-		 				<a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">编辑</a>
-		 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
-		 			</td>
-		 		</tr>
-		 		<tr>
-		 			<td>张德成</td>
-		 			<td>2013310200316</td>
-		 			<td>计科1303</td>
-		 			<td>大一</td>
-		 			<td>13866823383</td>
-		 			<td>
-		 				<a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">编辑</a>
-		 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
-		 			</td>
-		 		</tr>
-		 		<tr>
-		 			<td>杨晓</td>
-		 			<td>2013310200317</td>
-		 			<td>计科1303</td>
-		 			<td>大一</td>
-		 			<td>18671563389</td>
-		 			<td>
-		 				<a href="<%=basePath%>/TeacherServlet?method=updateStudent&studentId=${student.studentId}">编辑</a>
-		 				<a href="<%=basePath%>/TeacherServlet?method=deleteStudent&studentId=${student.studentId}">删除</a>
-		 			</td>
-		 		</tr>
 		</tbody>
       <table border="1">
     </div> <!-- /container -->
@@ -172,14 +141,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				shadeClose:false,	//开启遮罩关闭
 				content:'<%=basePath%>/TeacherServlet?method=toEditStudent',
 				yes:function(index){
-					
+					$.ajax({
+						method:'POST',
+						data:$("#studentEditForm").serialize(),
+						url:"<%=basePath%>/TeacherServlet?method=saveStudent",
+						success: function(data){
+							layer.msg(data);
+						},
+						error: function(){
+							layer.fail("操作失败");
+						}
+					});
 				}
 			}); 
-			//layer.msg("hello");
 		}
 		
+		var addStudent = function(){
+			 layer.open({
+				type:2,
+				title:'添加学生',
+				area:['400px', '450px'],
+				btn:['确定','关闭'],
+				closeBtn:1,	//不显示关闭按钮
+				shadeClose:false,	//开启遮罩关闭
+				content:'<%=basePath%>/TeacherServlet?method=toEditStudent',
+				yes:function(index){
+					$.ajax({
+						method:'POST',
+						data:$("#studentEditForm").serialize(),
+						url:"<%=basePath%>/TeacherServlet?method=saveStudent",
+						success: function(data){
+							layer.msg(data);
+						},
+						error: function(){
+							layer.fail("操作失败");
+						}
+					});
+				}
+			}); 
+		}
 		return {
-			saveStudent : saveStudent
+			saveStudent : saveStudent,
+			addStudent : addStudent
 		}
 	}();
 	</script>

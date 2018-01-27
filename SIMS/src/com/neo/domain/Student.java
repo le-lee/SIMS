@@ -6,19 +6,15 @@ public class Student implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String studentId;
-	private String classId;
-	private String studentName;
-	private String password;
-	private float grade;
-	private String phoneNo;
+	private String studentId;		//学生id
+	private String classId;			//班级id
+	private String gradeId;			//年级id
+	private String studentNo;		//学号
+	private String studentName;		//学生姓名
+	private String password;		//密码
+	private String phoneNo;			//联系电话
+	private String hometown;		//籍贯（家乡）
 	
-	public float getGrade() {
-		return grade;
-	}
-	public void setGrade(float grade) {
-		this.grade = grade;
-	}
 	public String getStudentId() {
 		return studentId;
 	}
@@ -31,11 +27,23 @@ public class Student implements Serializable{
 	public void setClassId(String classId) {
 		this.classId = classId;
 	}
+	public String getGradeId() {
+		return gradeId;
+	}
+	public void setGradeId(String gradeId) {
+		this.gradeId = gradeId;
+	}
 	public String getStudentName() {
 		return studentName;
 	}
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
+	}
+	public String getStudentNo() {
+		return studentNo;
+	}
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
 	}
 	public String getPassword() {
 		return password;
@@ -50,6 +58,12 @@ public class Student implements Serializable{
 		this.phoneNo = phoneNo;
 	}
 	
+	public String getHometown() {
+		return hometown;
+	}
+	public void setHometown(String hometown) {
+		this.hometown = hometown;
+	}
 	@Override
 	public String toString (){
 		return " studentId: "+ studentId+

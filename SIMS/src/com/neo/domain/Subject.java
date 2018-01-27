@@ -9,8 +9,8 @@ public class Subject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String subjectId;
-	private String subjectName;
+	private String subjectId;		//科目id
+	private String subjectName;		//科目名称
 	
 	public String getSubjectId() {
 		return subjectId;

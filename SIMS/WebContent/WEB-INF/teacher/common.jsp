@@ -1,0 +1,1 @@
+<link href="<%=basePath %>/resources/plugins/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

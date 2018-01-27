@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.neo.dao.StudentDao;
 import com.neo.domain.Student;
+import com.neo.utils.UUIDUtis;
 
 public class StudentService {
 	
@@ -28,15 +29,23 @@ public class StudentService {
 		}
 		return student;
 	}
+	
 	public boolean addStudent(Student student) throws Exception{
+		String password = "123456";
+		String studentId = UUIDUtis.generateId();
+		student.setStudentId(studentId);
+		student.setPassword(password);
 		return studentDao.addStudent(student);
 	}
+	
 	public boolean deleteStudent(String studentId) throws Exception{
 		return studentDao.deleteStudent(studentId);
 	}
+	
 	public boolean updateStudent(Student student) throws Exception{
 		return studentDao.updateStudent(student);
 	}
+	
 	public List<Student> getStudentList(int pageNo, int pageSize) throws Exception{
 		int startIndex = pageNo;
 		if (pageNo != 0){

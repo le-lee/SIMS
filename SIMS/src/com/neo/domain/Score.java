@@ -12,7 +12,7 @@ public class Score implements Serializable{
 	private String scoreId;		//成绩id
 	private String studentId;	//学生id
 	private String subjctId;	//科目id
-	private int score;		//分数
+	private int score;			//分数
 	public String getScoreId() {
 		return scoreId;
 	}

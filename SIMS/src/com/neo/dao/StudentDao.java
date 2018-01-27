@@ -30,8 +30,12 @@ public class StudentDao {
 			student = new Student();
 			student.setStudentId(rs.getString("studentId"));
 			student.setPassword(rs.getString("password"));
+			student.setClassId(rs.getString("classId"));
+			student.setGradeId(rs.getString("gradeId"));
 			student.setStudentName(rs.getString("studentName"));
+			student.setStudentNo(rs.getString("studentNo"));
 			student.setPhoneNo(rs.getString("phoneNo"));
+			student.setHometown(rs.getString("hometown"));
 		}
 		return student;
 	}
@@ -47,8 +51,12 @@ public class StudentDao {
 			student = new Student();
 			student.setStudentId(rs.getString("studentId"));
 			student.setPassword(rs.getString("password"));
+			student.setClassId(rs.getString("classId"));
+			student.setGradeId(rs.getString("gradeId"));
 			student.setStudentName(rs.getString("studentName"));
+			student.setStudentNo(rs.getString("studentNo"));
 			student.setPhoneNo(rs.getString("phoneNo"));
+			student.setHometown(rs.getString("hometown"));
 		}
 		return student;
 	}
@@ -73,10 +81,12 @@ public class StudentDao {
 			Student student = new Student();
 			student.setStudentId(rs.getString("studentId"));
 			student.setPassword(rs.getString("password"));
-			student.setStudentName(rs.getString("studentName"));
 			student.setClassId(rs.getString("classId"));
+			student.setGradeId(rs.getString("gradeId"));
+			student.setStudentName(rs.getString("studentName"));
+			student.setStudentNo(rs.getString("studentNo"));
 			student.setPhoneNo(rs.getString("phoneNo"));
-			student.setGrade(rs.getFloat("grade"));
+			student.setHometown(rs.getString("hometown"));
 			studentList.add(student);
 		}
 		return studentList;
@@ -106,14 +116,16 @@ public class StudentDao {
 	 * @throws Exception
 	 */
 	public boolean updateStudent(Student student) throws Exception{
-		String sql = "update student set classId=?, studentName=?, password=?, phoneNo=?  where studentId=? ";
+		String sql = "update student set classId=?, gradeId=?, studentNo=?,studentName=?, password=?, phoneNo=?  where studentId=? ";
 		Connection conn = JdbcUtils.getConncetion();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, student.getStudentId());
-		ps.setString(2, student.getStudentName());
-		ps.setString(3, student.getPassword());
-		ps.setString(4, student.getPhoneNo());
-		ps.setString(5, student.getStudentId());
+		ps.setString(2, student.getGradeId());
+		ps.setString(3, student.getStudentNo());
+		ps.setString(4, student.getStudentName());
+		ps.setString(5, student.getPassword());
+		ps.setString(6, student.getPhoneNo());
+		ps.setString(7, student.getStudentId());
 		boolean result = ps.execute();  
 		return result;
 	}
@@ -132,6 +144,7 @@ public class StudentDao {
 		boolean result = ps.execute();  
 		return result;
 	}
+	
 	/**
 	 * 增加学生
 	 * @param student
@@ -139,14 +152,17 @@ public class StudentDao {
 	 * @throws Exception
 	 */
 	public boolean addStudent(Student student) throws Exception{
-		String sql = "insert into student (studentId, classId, studentName, password, phoneNo) values(?,?,?,?,?) ";
+		String sql = "insert into student (studentId, classId, gradeId, studentNo, studentName, password, phoneNo,hometown) values(?,?,?,?,?,?,?,?) ";
 		Connection conn = JdbcUtils.getConncetion();
 		PreparedStatement ps = conn.prepareStatement(sql);
-//		ps.setString(1, generateId());  设置自增id
-		ps.setString(2, student.getStudentName());
-		ps.setString(3, student.getPassword());
-		ps.setString(4, student.getPhoneNo());
-		ps.setString(5, student.getStudentId());
+		ps.setString(1, student.getStudentId());  
+		ps.setString(2, student.getClassId());
+		ps.setString(3, student.getGradeId());
+		ps.setString(4, student.getStudentNo());
+		ps.setString(5, student.getStudentName());
+		ps.setString(6, student.getPassword());
+		ps.setString(7, student.getPhoneNo());
+		ps.setString(8, student.getHometown());
 		boolean result = ps.execute();  
 		return result;
 	}

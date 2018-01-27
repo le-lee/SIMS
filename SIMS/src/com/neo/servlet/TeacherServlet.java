@@ -1,7 +1,6 @@
 package com.neo.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,13 @@ public class TeacherServlet extends BaseServlet{
 	private static final long serialVersionUID = 1L;
 
 	StudentService studentService = new StudentService();
-
+	
+	@Override
+	public void init(){
+		
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String method = request.getParameter("method");
 		try {
@@ -54,8 +59,8 @@ public class TeacherServlet extends BaseServlet{
 			case "updateStudent":
 				updateStudent(request, response);
 				break;
-			case "addStudent":
-				addStudent(request, response);
+			case "saveStudent":
+				saveStudent(request, response);
 			case "getStudent":
 				getStudent(request, response);
 			default: 
@@ -162,10 +167,33 @@ public class TeacherServlet extends BaseServlet{
 		
 	}
 	/**
-	 * 增加学生
+	 * 保存学生
 	 */
-	private void addStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private String saveStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String studentId = request.getParameter("studentId");
+		String studentName = request.getParameter("studentName");
+		String studentNo = request.getParameter("studentNo");
+		String gradeId = request.getParameter("gradeId");
+		String classId = request.getParameter("classId");
 		
+		Student student = new Student();
+		student.setStudentName(studentName);
+		student.setStudentNo(studentNo);
+		student.setClassId(classId);
+		student.setGradeId(gradeId);
+		
+		boolean result = false;
+		//判断新增还是更新
+		if (studentId == null) {
+			//新增
+			result = studentService.addStudent(student);
+		} else {
+			result = studentService.updateStudent(student);
+		}
+		if (result == true) {
+			return "操作成功";
+		}
+		return "操作失败";
 	}	
 	
 	/**
