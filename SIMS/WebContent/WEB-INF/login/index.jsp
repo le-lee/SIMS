@@ -29,13 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
         
         <span class="col-xs-6">
-        	<input name="randomCode" class="form-control .col-xs-2" placeholder="请输入验证码"/>
+        	<input name="code" class="form-control .col-xs-2" placeholder="请输入验证码"/>
         </span>
         <div class="random">
-        	<img id="randImage" alt="验证码,点击刷新" 
-								src="<%=basePath%>/VCodeServlet" title="点击刷新验证码">
-								<a 	href="#" onclick="login.flushVcode();">看不清？</a>
+        	<img id="randImage" alt="验证码,点击刷新" src="<%=basePath%>/VCodeServlet" title="点击刷新验证码">
+			<a href="#" onclick="login.flushVcode();">看不清？</a>
         </div>
+        ${message }
         <div class="checkbox">
           <label>
             <input type="radio" name="userType" value="student"> 学生

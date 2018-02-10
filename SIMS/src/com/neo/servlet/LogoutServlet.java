@@ -2,6 +2,8 @@ package com.neo.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +34,16 @@ public class LogoutServlet extends HttpServlet {
 		if ( session == null) {
 			return;
 		}
-		session.removeAttribute("user");
-		response.sendRedirect("/WEB-INF/login/login.jsp"); 
+		if ( session.getAttribute("userType").equals("student") ){
+			session.removeAttribute("student");
+		}  else if ( session.getAttribute("userType").equals("teacher")) {
+			session.removeAttribute("teacher");
+		}
+		
+//		response.sendRedirect("/WEB-INF/login/index.jsp"); 
+		ServletContext context = getServletContext(); 
+		RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/login/index.jsp"); //定向的页面 
+		rd.forward(request, response); 
 	}
 
 	/**

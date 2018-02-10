@@ -51,8 +51,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><a href="<%=basePath%>/TeacherServlet?method=toResetPwd">修改密码</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎X老师</a></li>
-            <li><a href="logout.html"><span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a></li>
+           <li><a href="<%=basePath%>/TeacherServlet?method=toPersonalInfo"><span class="glyphicon glyphicon-user"></span>&nbsp;欢迎X老师</a></li>
+            <li><a href="<%=basePath%>/LogoutServlet"><span class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
